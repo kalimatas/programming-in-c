@@ -18,16 +18,23 @@ void copyString(char *from, char *to)
     *to = '\0';    
 }
 
+void printStringByChar(char *from)
+{
+    for (; *from != '\0'; ++from)
+        printf("%c", *from);
+
+    printf("\n");
+}
+
 int main(void)
 {
     char from[] = "hello";
     char to[50];
-    char *s;
 
-    s = "hello";
+    printStringByChar(from);
 
-    // copyStringIndex(from, to);
-    // copyStringIndex("Hello", to);
+    copyStringIndex(from, to);
+    copyStringIndex("Hello", to);
     copyString(from, to);
     printf("%s\n", to);
 
