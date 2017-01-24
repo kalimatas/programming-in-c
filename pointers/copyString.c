@@ -12,8 +12,8 @@ void copyStringIndex(char from[], char to[])
 
 void copyString(char *from, char *to)
 {
-    for (; *from != '\0'; ++from, ++to)
-        *to = *from;
+    while (*from)
+        *to++ = *from++;
 
     *to = '\0';    
 }

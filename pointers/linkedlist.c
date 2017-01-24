@@ -5,6 +5,16 @@ struct entry {
         struct entry *next;
 };
 
+void printList(struct entry *listPtr)
+{
+    while (listPtr != (struct entry *) 0) {
+        printf("%i ", listPtr->value);
+        listPtr = listPtr->next;
+    }
+
+    printf("\n");
+}
+
 struct entry *findEntry(struct entry *listPtr, const int match)
 {
     while (listPtr != (struct entry *) 0) {
@@ -15,6 +25,12 @@ struct entry *findEntry(struct entry *listPtr, const int match)
     }
 
     return (struct entry *) 0;
+}
+
+void insertEntry(struct entry *insert, struct entry *after)
+{
+    insert->next = after->next;
+    after->next = insert;
 }
 
 int main(void)
@@ -32,12 +48,7 @@ int main(void)
     n3.value = 300;
     n3.next = (struct entry *) 0;    
 
-    while (list_pointer != (struct entry *) 0) {
-        printf("%i\n", list_pointer->value);
-        list_pointer = list_pointer->next;
-    }
-
-    list_pointer = &n1;
+    printList(list_pointer);
 
     int search;
     printf("Enter search: ");
@@ -49,7 +60,18 @@ int main(void)
         printf("Found %i.\n", foundEntry->value);
     } else {
         printf("Not Found\n");
+
+        return 0;
     }
+
+    struct entry insert = {
+        240,
+        (struct entry *) 0
+    };
+
+    insertEntry(&insert, foundEntry);
+
+    printList(list_pointer);
 
     return 0;
 }
