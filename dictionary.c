@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 struct entry {
     char word[15];
@@ -61,7 +62,7 @@ int lookup(const struct entry dictionary[], const char search[],
     return -1;
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
     const struct entry dictionary[100] = {
         {"a", "first letter"},
@@ -70,16 +71,21 @@ int main(void)
         {"z", "last letter"}
     };
     int entries = 4;
-    char word[15];
+    // char word[15];
     int entryIndex;
 
-    printf("Enter word: ");
-    scanf("%14s", word);
+    // printf("Enter word: ");
+    // scanf("%14s", word);
 
-    entryIndex = lookup(dictionary, word, entries);
+    if (argc != 2) {
+        fprintf(stderr, "No word typed on the command line.\n");
+        return EXIT_FAILURE;
+    }
+
+    entryIndex = lookup(dictionary, argv[1], entries);
 
     if (entryIndex != -1)
-        printf("Definition of \"%s\" is \"%s\".\n", word, dictionary[entryIndex].definition);
+        printf("Definition of \"%s\" is \"%s\".\n", argv[1], dictionary[entryIndex].definition);
     else
         printf("Definition is not found.\n");
 
