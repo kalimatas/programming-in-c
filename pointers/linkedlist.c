@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 struct entry {
-        int value;
-        struct entry *next;
+    int value;
+    struct entry *next;
 };
 
 void printList(struct entry *listPtr)
@@ -33,6 +34,21 @@ void insertEntry(struct entry *insert, struct entry *after)
     after->next = insert;
 }
 
+struct entry *addEntry(struct entry *listPtr, const int value)
+{
+    while (listPtr->next != NULL)
+        listPtr = listPtr->next;
+
+    listPtr->next = (struct entry *) malloc(sizeof(struct entry));
+
+    if (listPtr->next != NULL) {
+        (listPtr->next)->next = (struct entry *) NULL;
+        (listPtr->next)->value = value;
+    }
+
+    return listPtr->next;        
+}
+
 int main(void)
 {
     struct entry n1, n2, n3;
@@ -46,7 +62,7 @@ int main(void)
     n2.next = &n3;
 
     n3.value = 300;
-    n3.next = (struct entry *) 0;    
+    n3.next = (struct entry *) 0;
 
     printList(list_pointer);
 
@@ -70,6 +86,10 @@ int main(void)
     };
 
     insertEntry(&insert, foundEntry);
+
+    printList(list_pointer);
+
+    addEntry(list_pointer, 42);
 
     printList(list_pointer);
 
