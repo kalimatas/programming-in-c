@@ -5,7 +5,7 @@ struct date {
     int month;
     int day;
     int year; 
-    };
+};
 
 struct date foo (struct date x) {
     ++x.day;
