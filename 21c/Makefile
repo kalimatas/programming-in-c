@@ -1,5 +1,6 @@
 P=gsl_erf
 OBJECTS=
+# for extendstruct -fms-extensions
 CFLAGS=`pkg-config --cflags glib-2.0` -g -std=c11 -Wall -O3
 LDLIBS=`pkg-config --libs gsl glib-2.0`
 CC=gcc
@@ -27,3 +28,5 @@ compound:
 show_tree: process_dir.o
 
 charct: process_dir.o unictr.o
+
+extendstruct:
